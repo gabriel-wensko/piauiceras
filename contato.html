@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — Piauí Ceras</title>
+  <meta name="description" content="Entre em contato com a Piauí Ceras e Produtos Derivados Ltda — telefones, e-mail e endereço em São Paulo.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header id="site-header"></header>
+
+  <section class="titulo-pagina">
+    <div class="container">
+      <h1>Fale Conosco</h1>
+      <p>Estamos prontos para atender você</p>
+    </div>
+  </section>
+
+  <section class="secao secao-alt">
+    <div class="container">
+      <div class="contato-grid">
+
+        <!-- ==============================================
+             INFORMAÇÕES DE CONTATO
+             Os textos são preenchidos automaticamente a
+             partir do js/dados.js (bloco "contato").
+             ============================================== -->
+        <div class="info-contato">
+          <div class="info-item">
+            <span class="icone">📞</span>
+            <div><strong>Telefones</strong><p id="ct-telefones"></p></div>
+          </div>
+          <div class="info-item">
+            <span class="icone">✉️</span>
+            <div><strong>E-mail</strong><p><a id="ct-email" href="#"></a></p></div>
+          </div>
+          <div class="info-item">
+            <span class="icone">📍</span>
+            <div><strong>Endereço</strong><p id="ct-endereco"></p></div>
+          </div>
+          <div class="info-item">
+            <span class="icone">🕗</span>
+            <div><strong>Horário de atendimento</strong><p id="ct-horario"></p></div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+             FORMULÁRIO
+             Ao enviar, abre o programa de e-mail do
+             visitante já com a mensagem pronta (mailto).
+             ============================================== -->
+        <form class="form-contato" id="form-contato">
+          <h2 style="font-size: 1.3rem;">Envie uma mensagem</h2>
+          <div>
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" required placeholder="Seu nome">
+          </div>
+          <div>
+            <label for="empresa">Empresa (opcional)</label>
+            <input type="text" id="empresa" placeholder="Nome da sua empresa">
+          </div>
+          <div>
+            <label for="telefone">Telefone (opcional)</label>
+            <input type="tel" id="telefone" placeholder="(11) 99999-9999">
+          </div>
+          <div>
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" rows="5" required placeholder="Como podemos ajudar?"></textarea>
+          </div>
+          <button type="submit" class="botao">Enviar mensagem</button>
+        </form>
+      </div>
+
+      <!-- ==============================================
+           MAPA — Google Maps com o endereço da empresa.
+           Se mudar de endereço, troque o texto depois de
+           "q=" na linha do iframe (use + no lugar de espaço).
+           ============================================== -->
+      <div class="mapa">
+        <iframe
+          src="https://www.google.com/maps?q=Travessa+Gilberto+Menezes+de+Goes,+64,+Vila+Amalia,+Sao+Paulo,+SP&output=embed"
+          loading="lazy" title="Mapa — localização da Piauí Ceras"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /* Preenche os dados de contato a partir do js/dados.js */
+    document.addEventListener("DOMContentLoaded", function () {
+      var c = DADOS.contato;
+      document.getElementById("ct-telefones").textContent = c.telefones.join(" · ");
+      var email = document.getElementById("ct-email");
+      email.textContent = c.email;
+      email.href = "mailto:" + c.email;
+      document.getElementById("ct-endereco").innerHTML =
+        c.endereco + "<br>" + c.cidade + " · " + c.cep;
+      document.getElementById("ct-horario").textContent = c.horario;
+
+      /* Formulário: monta o e-mail e abre o programa de e-mail */
+      document.getElementById("form-contato").addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var corpo =
+          "Nome: " + document.getElementById("nome").value + "\n" +
+          "Empresa: " + document.getElementById("empresa").value + "\n" +
+          "Telefone: " + document.getElementById("telefone").value + "\n\n" +
+          document.getElementById("mensagem").value;
+        location.href = "mailto:" + c.email +
+          "?subject=" + encodeURIComponent("Contato pelo site — " + document.getElementById("nome").value) +
+          "&body=" + encodeURIComponent(corpo);
+      });
+    });
+  </script>
+</body>
+</html>

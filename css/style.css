@@ -1,0 +1,298 @@
+/* ============================================================
+   ESTILOS — Piauí Ceras
+   ============================================================
+   Para mudar a "cara" do site inteiro, altere só as variáveis
+   abaixo (cores, fontes, arredondamento). O resto do arquivo
+   raramente precisa ser tocado.
+   ============================================================ */
+
+:root {
+  /* CORES — troque aqui para mudar o tema inteiro */
+  --verde-escuro: #1b3a2d;   /* fundo do hero e rodapé */
+  --verde:        #2e6b4f;   /* cor principal (botões, links) */
+  --verde-claro:  #e8f2ec;   /* fundos suaves */
+  --ambar:        #d99a2b;   /* cor de destaque (carnaúba) */
+  --ambar-claro:  #f7ecd7;
+  --texto:        #22302a;
+  --texto-suave:  #5a6b62;
+  --branco:       #ffffff;
+  --fundo:        #fafaf7;
+
+  /* FONTES */
+  --fonte: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+
+  /* ARREDONDAMENTO dos cartões e botões */
+  --raio: 14px;
+
+  /* IMAGEM DO HERO (página inicial) — para usar uma foto:
+     troque a linha abaixo por algo como:
+     --hero-fundo: linear-gradient(rgba(27,58,45,.82), rgba(27,58,45,.82)),
+                   url("../img/minha-foto.jpg") center/cover;      */
+  --hero-fundo: radial-gradient(1200px 500px at 80% -10%, #2e6b4f 0%, transparent 60%),
+                radial-gradient(900px 420px at 10% 110%, #24503d 0%, transparent 55%),
+                var(--verde-escuro);
+}
+
+/* ---------- RESET BÁSICO ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--fonte);
+  color: var(--texto);
+  background: var(--fundo);
+  line-height: 1.65;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--verde); }
+
+.container { width: min(1120px, 92%); margin-inline: auto; }
+
+/* ---------- CABEÇALHO ---------- */
+#site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e6e9e4;
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 68px; gap: 1rem;
+}
+.logo {
+  display: flex; align-items: center; gap: .55rem;
+  text-decoration: none; font-weight: 800; font-size: 1.25rem;
+  color: var(--verde-escuro); letter-spacing: -.02em;
+}
+.logo-icone { font-size: 1.5rem; }
+
+.nav ul { display: flex; gap: .25rem; list-style: none; }
+.nav a {
+  display: block; padding: .55rem .95rem;
+  text-decoration: none; color: var(--texto);
+  font-weight: 600; font-size: .95rem;
+  border-radius: 999px; transition: background .2s, color .2s;
+}
+.nav a:hover { background: var(--verde-claro); color: var(--verde); }
+.nav a.ativo { background: var(--verde); color: var(--branco); }
+
+/* botão hambúrguer (aparece só no celular) */
+.menu-btn {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: 0; cursor: pointer; padding: .5rem;
+}
+.menu-btn span {
+  width: 24px; height: 2.6px; background: var(--verde-escuro);
+  border-radius: 2px; transition: transform .25s, opacity .25s;
+}
+.menu-btn.aberto span:nth-child(1) { transform: translateY(7.6px) rotate(45deg); }
+.menu-btn.aberto span:nth-child(2) { opacity: 0; }
+.menu-btn.aberto span:nth-child(3) { transform: translateY(-7.6px) rotate(-45deg); }
+
+/* ---------- HERO (topo da página inicial) ---------- */
+.hero {
+  background: var(--hero-fundo);
+  color: var(--branco);
+  padding: clamp(4rem, 10vw, 7.5rem) 0;
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.15; letter-spacing: -.02em;
+  max-width: 20ch; margin-inline: auto;
+}
+.hero h1 em { color: var(--ambar); font-style: normal; }
+.hero p {
+  margin: 1.2rem auto 2rem; max-width: 58ch;
+  font-size: 1.1rem; color: #d6e4dc;
+}
+.hero-selo {
+  display: inline-block; margin-bottom: 1.2rem;
+  padding: .35rem 1rem; border-radius: 999px;
+  background: rgba(217, 154, 43, .16);
+  border: 1px solid rgba(217, 154, 43, .45);
+  color: var(--ambar); font-weight: 700; font-size: .85rem;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+
+/* ---------- BOTÕES ---------- */
+.botao {
+  display: inline-block; padding: .8rem 1.7rem;
+  border-radius: 999px; text-decoration: none; font-weight: 700;
+  background: var(--ambar); color: var(--verde-escuro);
+  transition: transform .15s, box-shadow .15s, background .2s;
+}
+.botao:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.18); }
+.botao-secundario {
+  background: transparent; color: var(--branco);
+  border: 2px solid rgba(255,255,255,.5); margin-left: .6rem;
+}
+.botao-secundario:hover { border-color: var(--branco); }
+.botao-claro {
+  background: var(--verde-claro); color: var(--verde);
+  padding: .55rem 1.2rem; font-size: .9rem; margin-top: auto;
+}
+
+/* ---------- SEÇÕES ---------- */
+.secao { padding: clamp(3.2rem, 7vw, 5.5rem) 0; }
+.secao-alt { background: var(--branco); }
+.secao h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  letter-spacing: -.02em; color: var(--verde-escuro);
+  margin-bottom: .6rem;
+}
+.secao .subtitulo { color: var(--texto-suave); max-width: 62ch; margin-bottom: 2.4rem; }
+.centro { text-align: center; }
+.centro .subtitulo { margin-inline: auto; }
+
+/* ---------- GRADE DE CARTÕES ---------- */
+.grade {
+  display: grid; gap: 1.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.card {
+  background: var(--branco);
+  border: 1px solid #e9ece7;
+  border-radius: var(--raio);
+  padding: 1.8rem 1.6rem;
+  display: flex; flex-direction: column; gap: .7rem;
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 14px 34px rgba(27,58,45,.12); }
+.card-icone {
+  width: 56px; height: 56px; font-size: 1.7rem;
+  display: grid; place-items: center;
+  background: var(--ambar-claro); border-radius: 12px;
+}
+.card h3 { color: var(--verde-escuro); font-size: 1.15rem; }
+.card p { color: var(--texto-suave); font-size: .95rem; flex: 1; }
+
+/* ---------- NÚMEROS / DESTAQUES ---------- */
+.numeros {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  margin-top: 2.5rem;
+}
+.numero {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--raio); padding: 1.3rem; text-align: center;
+}
+.numero strong { display: block; font-size: 2rem; color: var(--ambar); }
+.numero span { font-size: .9rem; color: #cfe0d6; }
+
+/* ---------- BLOCO DE TEXTO (história) ---------- */
+.bloco-texto { max-width: 72ch; }
+.bloco-texto p { margin-bottom: 1.1rem; color: #37453e; }
+.bloco-texto p:first-of-type::first-letter {
+  font-size: 3.2rem; font-weight: 800; float: left;
+  line-height: 1; padding-right: .6rem; color: var(--verde);
+}
+
+/* linha do tempo */
+.timeline { margin-top: 2.5rem; border-left: 3px solid var(--verde-claro); }
+.timeline-item { position: relative; padding: 0 0 1.8rem 1.8rem; }
+.timeline-item::before {
+  content: ""; position: absolute; left: -9.5px; top: .35rem;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--ambar); border: 3px solid var(--fundo);
+}
+.timeline-item strong { color: var(--verde-escuro); display: block; }
+.timeline-item p { color: var(--texto-suave); font-size: .95rem; }
+
+/* ---------- FAIXA DE CHAMADA (CTA) ---------- */
+.cta {
+  background: var(--verde-escuro); color: var(--branco);
+  border-radius: var(--raio); padding: clamp(2rem, 5vw, 3.2rem);
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 1.5rem;
+}
+.cta h2 { color: var(--branco); font-size: clamp(1.4rem, 3vw, 1.9rem); }
+.cta p { color: #cfe0d6; }
+
+/* ---------- PÁGINA DE CONTATO ---------- */
+.contato-grid {
+  display: grid; gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: start;
+}
+.info-contato { display: grid; gap: 1rem; }
+.info-item {
+  display: flex; gap: .9rem; align-items: flex-start;
+  background: var(--branco); border: 1px solid #e9ece7;
+  border-radius: var(--raio); padding: 1.1rem 1.3rem;
+}
+.info-item .icone { font-size: 1.4rem; }
+.info-item strong { color: var(--verde-escuro); display: block; font-size: .95rem; }
+.info-item p, .info-item a { font-size: .95rem; color: var(--texto-suave); }
+
+.form-contato {
+  background: var(--branco); border: 1px solid #e9ece7;
+  border-radius: var(--raio); padding: 1.8rem;
+  display: grid; gap: 1rem;
+}
+.form-contato label { font-weight: 600; font-size: .9rem; color: var(--verde-escuro); }
+.form-contato input, .form-contato textarea {
+  width: 100%; margin-top: .35rem;
+  padding: .75rem .9rem; font: inherit;
+  border: 1.5px solid #dde3dd; border-radius: 10px;
+  background: var(--fundo); transition: border-color .2s;
+}
+.form-contato input:focus, .form-contato textarea:focus {
+  outline: none; border-color: var(--verde);
+}
+.form-contato button { border: 0; cursor: pointer; font: inherit; justify-self: start; }
+
+.mapa {
+  margin-top: 2.5rem; border-radius: var(--raio); overflow: hidden;
+  border: 1px solid #e9ece7;
+}
+.mapa iframe { width: 100%; height: 380px; border: 0; display: block; }
+
+/* ---------- CABEÇALHO INTERNO DAS PÁGINAS ---------- */
+.titulo-pagina {
+  background: var(--verde-escuro); color: var(--branco);
+  padding: clamp(2.5rem, 6vw, 4rem) 0; text-align: center;
+}
+.titulo-pagina h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.02em; }
+.titulo-pagina p { color: #cfe0d6; margin-top: .5rem; }
+
+/* ---------- RODAPÉ ---------- */
+#site-footer { background: var(--verde-escuro); color: #cfe0d6; margin-top: 4rem; }
+.footer-grid {
+  display: grid; gap: 2rem; padding: 3rem 0 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.footer-logo { font-weight: 800; font-size: 1.2rem; color: var(--branco); margin-bottom: .4rem; }
+.footer-cnpj { font-size: .85rem; opacity: .75; margin-top: .4rem; }
+#site-footer h4 {
+  color: var(--ambar); font-size: .85rem;
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: .7rem;
+}
+.footer-links { list-style: none; }
+.footer-links a, #site-footer a { color: #cfe0d6; text-decoration: none; }
+.footer-links a:hover, #site-footer a:hover { color: var(--branco); text-decoration: underline; }
+#site-footer p { font-size: .95rem; margin-bottom: .3rem; }
+.footer-base {
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding: 1.1rem 0; font-size: .85rem; text-align: center; opacity: .8;
+}
+
+/* ---------- ANIMAÇÃO DE ENTRADA ---------- */
+.animavel { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+.animavel.visivel { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .animavel { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- CELULAR ---------- */
+@media (max-width: 760px) {
+  .menu-btn { display: flex; }
+  .nav {
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: var(--branco); border-bottom: 1px solid #e6e9e4;
+    display: none; padding: .8rem 4%;
+  }
+  .nav.aberto { display: block; }
+  .nav ul { flex-direction: column; }
+  .botao-secundario { margin-left: 0; margin-top: .8rem; }
+}
