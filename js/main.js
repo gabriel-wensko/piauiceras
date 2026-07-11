@@ -6,6 +6,7 @@
      • o cabeçalho (logo + menu) de todas as páginas
      • o rodapé de todas as páginas
      • os cartões de produtos (onde houver [data-produtos])
+     • os cartões de mercados (onde houver [data-mercados])
    ============================================================ */
 
 (function () {
@@ -26,7 +27,7 @@
     alvo.innerHTML =
       '<div class="container header-inner">' +
       '  <a href="index.html" class="logo">' +
-      '    <span class="logo-icone">🌴</span>' +
+      '    <img class="logo-icone" src="img/logo-simbolo.svg" alt="">' +
       '    <span class="logo-texto">' + DADOS.empresa.nome + "</span>" +
       "  </a>" +
       '  <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false">' +
@@ -60,7 +61,8 @@
     alvo.innerHTML =
       '<div class="container footer-grid">' +
       "  <div>" +
-      '    <p class="footer-logo">🌴 ' + DADOS.empresa.nome + "</p>" +
+      '    <p class="footer-logo"><img src="img/logo-simbolo.svg" alt="" class="footer-logo-img"> ' +
+      DADOS.empresa.nome + "</p>" +
       "    <p>" + DADOS.empresa.slogan + "</p>" +
       "    <p class='footer-cnpj'>CNPJ " + DADOS.empresa.cnpj + "</p>" +
       "  </div>" +
@@ -80,30 +82,38 @@
       ". Todos os direitos reservados.</div></div>";
   }
 
-  /* ---------- CARTÕES DE PRODUTOS ---------- */
-  function montarProdutos() {
-    const alvo = document.querySelector("[data-produtos]");
-    if (!alvo) return;
+  /* ---------- CARTÕES (produtos e mercados) ---------- */
+  function cartaoHTML(p) {
+    const botao = p.link
+      ? '<a class="botao botao-claro" href="' + p.link + '">Saiba mais →</a>'
+      : "";
+    const topo = p.imagem
+      ? '<div class="card-foto"><img src="' + p.imagem + '" alt="' + p.nome + '" loading="lazy"></div>'
+      : '<div class="card-icone">' + p.icone + "</div>";
+    return (
+      '<article class="card">' +
+      topo +
+      '<div class="card-corpo">' +
+      "  <h3>" + p.nome + "</h3>" +
+      "  <p>" + p.descricao + "</p>" +
+      botao +
+      "</div>" +
+      "</article>"
+    );
+  }
 
-    // data-produtos="3" limita a quantidade (usado na página inicial)
-    const limite = parseInt(alvo.getAttribute("data-produtos"), 10);
-    const lista = isNaN(limite) ? DADOS.produtos : DADOS.produtos.slice(0, limite);
+  function preencherGrade(seletor, lista) {
+    document.querySelectorAll(seletor).forEach(function (alvo) {
+      // data-produtos="3" limita a quantidade (usado na página inicial)
+      const limite = parseInt(alvo.getAttribute(seletor.replace(/[\[\]]/g, "")), 10);
+      const itens = isNaN(limite) ? lista : lista.slice(0, limite);
+      alvo.innerHTML = itens.map(cartaoHTML).join("");
+    });
+  }
 
-    alvo.innerHTML = lista
-      .map(function (p) {
-        const botao = p.link
-          ? '<a class="botao botao-claro" href="' + p.link + '">Saiba mais →</a>'
-          : "";
-        return (
-          '<article class="card">' +
-          '  <div class="card-icone">' + p.icone + "</div>" +
-          "  <h3>" + p.nome + "</h3>" +
-          "  <p>" + p.descricao + "</p>" +
-          botao +
-          "</article>"
-        );
-      })
-      .join("");
+  function montarCartoes() {
+    preencherGrade("[data-produtos]", DADOS.produtos);
+    preencherGrade("[data-mercados]", DADOS.mercados);
   }
 
   /* ---------- ANIMAÇÃO SUAVE AO ROLAR ---------- */
@@ -130,7 +140,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     montarHeader();
     montarFooter();
-    montarProdutos();
+    montarCartoes();
     animarAoRolar();
   });
 })();

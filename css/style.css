@@ -24,12 +24,11 @@
   /* ARREDONDAMENTO dos cartões e botões */
   --raio: 14px;
 
-  /* IMAGEM DO HERO (página inicial) — para usar uma foto:
-     troque a linha abaixo por algo como:
-     --hero-fundo: linear-gradient(rgba(27,58,45,.82), rgba(27,58,45,.82)),
-                   url("../img/minha-foto.jpg") center/cover;      */
-  --hero-fundo: radial-gradient(1200px 500px at 80% -10%, #2e6b4f 0%, transparent 60%),
-                radial-gradient(900px 420px at 10% 110%, #24503d 0%, transparent 55%),
+  /* IMAGEM DO HERO (página inicial) — para trocar a foto,
+     substitua o arquivo img/hero-carnauba.jpg por outro com o
+     mesmo nome, ou mude o caminho na linha abaixo.             */
+  --hero-fundo: linear-gradient(rgba(20, 46, 35, .78), rgba(20, 46, 35, .86)),
+                url("../img/hero-carnauba.jpg") center/cover no-repeat,
                 var(--verde-escuro);
 }
 
@@ -63,7 +62,7 @@ a { color: var(--verde); }
   text-decoration: none; font-weight: 800; font-size: 1.25rem;
   color: var(--verde-escuro); letter-spacing: -.02em;
 }
-.logo-icone { font-size: 1.5rem; }
+.logo-icone { width: 40px; height: 40px; display: block; }
 
 .nav ul { display: flex; gap: .25rem; list-style: none; }
 .nav a {
@@ -153,15 +152,29 @@ a { color: var(--verde); }
   background: var(--branco);
   border: 1px solid #e9ece7;
   border-radius: var(--raio);
-  padding: 1.8rem 1.6rem;
-  display: flex; flex-direction: column; gap: .7rem;
+  overflow: hidden;
+  display: flex; flex-direction: column;
   transition: transform .2s, box-shadow .2s;
 }
 .card:hover { transform: translateY(-5px); box-shadow: 0 14px 34px rgba(27,58,45,.12); }
+.card-foto {
+  aspect-ratio: 16 / 10; overflow: hidden;
+  background: var(--verde-claro);
+}
+.card-foto img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .35s ease;
+}
+.card:hover .card-foto img { transform: scale(1.05); }
+.card-corpo {
+  padding: 1.4rem 1.5rem 1.6rem;
+  display: flex; flex-direction: column; gap: .7rem; flex: 1;
+}
 .card-icone {
   width: 56px; height: 56px; font-size: 1.7rem;
   display: grid; place-items: center;
   background: var(--ambar-claro); border-radius: 12px;
+  margin: 1.6rem 1.5rem 0;
 }
 .card h3 { color: var(--verde-escuro); font-size: 1.15rem; }
 .card p { color: var(--texto-suave); font-size: .95rem; flex: 1; }
@@ -262,7 +275,11 @@ a { color: var(--verde); }
   display: grid; gap: 2rem; padding: 3rem 0 2rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
-.footer-logo { font-weight: 800; font-size: 1.2rem; color: var(--branco); margin-bottom: .4rem; }
+.footer-logo {
+  font-weight: 800; font-size: 1.2rem; color: var(--branco);
+  margin-bottom: .4rem; display: flex; align-items: center; gap: .55rem;
+}
+.footer-logo-img { width: 34px; height: 34px; }
 .footer-cnpj { font-size: .85rem; opacity: .75; margin-top: .4rem; }
 #site-footer h4 {
   color: var(--ambar); font-size: .85rem;

@@ -1,4 +1,0 @@
-Coloque nesta pasta as fotos que quiser usar no site
-(fachada, produtos, equipe, etc).
-
-Depois, veja no LEIA-ME.md como apontar o site para elas.
