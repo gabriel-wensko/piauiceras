@@ -71,8 +71,20 @@ Para ativar (só precisa fazer uma vez):
 Até a chave ser preenchida, o formulário mostra um aviso em vez de enviar.
 
 ## Publicar na internet
-O site está publicado via GitHub Pages. Depois de alterar algo, é preciso
-enviar as mudanças (commit + push) para elas irem ao ar.
+O site é publicado por FTP, usando o FileZilla. Depois de alterar algo,
+é preciso conectar no FileZilla e enviar os arquivos alterados para o
+servidor — só editar localmente não coloca as mudanças no ar.
+
+Passo a passo:
+1. Abra o FileZilla e conecte no site salvo (Arquivo → Gerenciador de Sites).
+2. Do lado esquerdo (seu computador), navegue até esta pasta do site.
+3. Do lado direito (servidor), navegue até a pasta onde o site fica publicado.
+4. Selecione os arquivos/pastas que você alterou e arraste do lado
+   esquerdo para o direito (ou clique com o botão direito → Fazer upload).
+   Na dúvida, pode arrastar a pasta inteira do site — o FileZilla substitui
+   só o que for diferente.
+5. Aguarde a fila de transferências terminar (parte de baixo da tela) e
+   confira o site no navegador.
 
 ## Créditos das imagens
 As fotos da pasta `img/` foram baixadas do Wikimedia Commons e são de

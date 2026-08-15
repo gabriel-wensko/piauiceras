@@ -195,21 +195,23 @@ a { color: var(--verde); }
 
 /* ---------- BLOCO DE TEXTO (história) ---------- */
 .bloco-texto { max-width: 72ch; }
+.bloco-texto::after { content: ""; display: table; clear: both; }
 .bloco-texto p { margin-bottom: 1.1rem; color: #37453e; }
 .bloco-texto p:first-of-type::first-letter {
   font-size: 3.2rem; font-weight: 800; float: left;
   line-height: 1; padding-right: .6rem; color: var(--verde);
 }
 
-/* Foto de destaque dentro de um texto (ex.: carnaúba na página de história) */
+/* Foto de destaque ao lado do texto (ex.: carnaúba na página de história) */
 .foto-destaque {
-  max-width: 420px; margin: 2rem auto; border-radius: var(--raio);
+  float: right; width: 300px; max-width: 45%;
+  margin: .3rem 0 1.2rem 2rem; border-radius: var(--raio);
   overflow: hidden; box-shadow: 0 14px 34px rgba(27,58,45,.14);
 }
 .foto-destaque img { width: 100%; height: auto; display: block; }
 .foto-destaque figcaption {
-  padding: .7rem 1.1rem; background: var(--verde-claro);
-  color: var(--texto-suave); font-size: .85rem; font-style: italic;
+  padding: .6rem .9rem; background: var(--verde-claro);
+  color: var(--texto-suave); font-size: .82rem; font-style: italic;
 }
 
 /* linha do tempo */
@@ -323,4 +325,5 @@ a { color: var(--verde); }
   .nav.aberto { display: block; }
   .nav ul { flex-direction: column; }
   .botao-secundario { margin-left: 0; margin-top: .8rem; }
+  .foto-destaque { float: none; width: 100%; max-width: 320px; margin: 0 auto 1.5rem; }
 }
