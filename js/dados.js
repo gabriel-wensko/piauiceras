@@ -34,7 +34,7 @@ const DADOS = {
     // 1. Acesse https://web3forms.com
     // 2. Digite o e-mail que deve RECEBER as mensagens (ex.: o e-mail acima)
     // 3. Copie a "Access Key" que chega por e-mail e cole abaixo, entre aspas
-    web3formsKey: "39bcf0b2-a514-46ff-84d3-421e632e57a2",
+    web3formsKey: "a23201d5-abdd-42ad-a2e5-6eff1322c7dd",
   },
 
   /* ---------- PRODUTOS ----------
