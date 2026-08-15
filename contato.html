@@ -49,14 +49,19 @@
 
         <!-- ==============================================
              FORMULÁRIO
-             Ao enviar, abre o programa de e-mail do
-             visitante já com a mensagem pronta (mailto).
+             Ao enviar, a mensagem vai direto por e-mail via
+             Web3Forms (sem abrir programa de e-mail nenhum).
+             A chave de envio fica em js/dados.js → contato.web3formsKey
              ============================================== -->
         <form class="form-contato" id="form-contato">
           <h2 style="font-size: 1.3rem;">Envie uma mensagem</h2>
           <div>
             <label for="nome">Nome</label>
-            <input type="text" id="nome" required placeholder="Seu nome">
+            <input type="text" id="nome" name="name" required placeholder="Seu nome">
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="seu@email.com">
           </div>
           <div>
             <label for="empresa">Empresa (opcional)</label>
@@ -68,9 +73,12 @@
           </div>
           <div>
             <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" rows="5" required placeholder="Como podemos ajudar?"></textarea>
+            <textarea id="mensagem" name="message" rows="5" required placeholder="Como podemos ajudar?"></textarea>
           </div>
+          <!-- Campo-armadilha anti-spam: invisível para pessoas, mas robôs costumam preencher -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <button type="submit" class="botao">Enviar mensagem</button>
+          <p id="form-status" role="status" style="font-size:.9rem; margin:0;"></p>
         </form>
       </div>
 
@@ -104,17 +112,56 @@
         c.endereco + "<br>" + c.cidade + " · " + c.cep;
       document.getElementById("ct-horario").textContent = c.horario;
 
-      /* Formulário: monta o e-mail e abre o programa de e-mail */
-      document.getElementById("form-contato").addEventListener("submit", function (ev) {
+      /* Formulário: envia a mensagem por e-mail via Web3Forms (sem abrir programa de e-mail) */
+      var form = document.getElementById("form-contato");
+      var status = document.getElementById("form-status");
+      form.addEventListener("submit", function (ev) {
         ev.preventDefault();
-        var corpo =
-          "Nome: " + document.getElementById("nome").value + "\n" +
-          "Empresa: " + document.getElementById("empresa").value + "\n" +
-          "Telefone: " + document.getElementById("telefone").value + "\n\n" +
-          document.getElementById("mensagem").value;
-        location.href = "mailto:" + c.email +
-          "?subject=" + encodeURIComponent("Contato pelo site — " + document.getElementById("nome").value) +
-          "&body=" + encodeURIComponent(corpo);
+
+        if (!c.web3formsKey || c.web3formsKey === "COLE_AQUI_SUA_ACCESS_KEY") {
+          status.textContent = "Formulário ainda não configurado. Veja js/dados.js → contato.web3formsKey.";
+          status.style.color = "#b3261e";
+          return;
+        }
+
+        var botao = form.querySelector("button[type=submit]");
+        botao.disabled = true;
+        status.textContent = "Enviando...";
+        status.style.color = "";
+
+        var dados = {
+          access_key: c.web3formsKey,
+          subject: "Contato pelo site — " + document.getElementById("nome").value,
+          name: document.getElementById("nome").value,
+          email: document.getElementById("email").value,
+          empresa: document.getElementById("empresa").value,
+          telefone: document.getElementById("telefone").value,
+          message: document.getElementById("mensagem").value,
+          botcheck: form.querySelector("[name=botcheck]").checked,
+        };
+
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(dados),
+        })
+          .then(function (resposta) { return resposta.json(); })
+          .then(function (resultado) {
+            if (resultado.success) {
+              status.textContent = "Mensagem enviada! Em breve entraremos em contato.";
+              status.style.color = "var(--verde)";
+              form.reset();
+            } else {
+              throw new Error(resultado.message || "Falha no envio");
+            }
+          })
+          .catch(function () {
+            status.textContent = "Não foi possível enviar agora. Tente novamente ou ligue para " + c.telefones[0] + ".";
+            status.style.color = "#b3261e";
+          })
+          .finally(function () {
+            botao.disabled = false;
+          });
       });
     });
   </script>

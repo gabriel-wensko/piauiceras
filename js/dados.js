@@ -22,13 +22,19 @@ const DADOS = {
 
   /* ---------- CONTATO ---------- */
   contato: {
-    telefones: ["(11) 2233-0022", "(11) 2235-1850"],
-    whatsapp: "",                       // ex.: "(11) 99999-9999" — deixe "" para ocultar
-    email: "piauiceras@uol.com.br",
+    telefones: ["(11) 2233-1977"],
+    whatsapp: "+55 (11) 94186-7843",                       // ex.: "(11) 99999-9999" — deixe "" para ocultar
+    email: "piauiceras@piauiceras.com.br",
     endereco: "Travessa Gilberto Menezes de Góes, 64 — Vila Amália",
     cidade: "São Paulo — SP",
     cep: "CEP 02617-120",
-    horario: "Segunda a sexta, das 8h às 18h",
+    horario: "Segunda a sexta, das 8h às 17h",
+
+    // Chave do formulário de contato (Web3Forms). Para obter a sua:
+    // 1. Acesse https://web3forms.com
+    // 2. Digite o e-mail que deve RECEBER as mensagens (ex.: o e-mail acima)
+    // 3. Copie a "Access Key" que chega por e-mail e cole abaixo, entre aspas
+    web3formsKey: "39bcf0b2-a514-46ff-84d3-421e632e57a2",
   },
 
   /* ---------- PRODUTOS ----------
@@ -51,21 +57,21 @@ const DADOS = {
       nome: "Ceras de Abelha e Emulsões",
       icone: "🐝",
       imagem: "img/produto-abelha.jpg",
-      descricao: "Cera de abelha purificada e emulsões, com aroma e plasticidade únicos. Aplicação em cosméticos, velas, alimentos e indústria farmacêutica.",
+      descricao: "Cera de abelha purificada e emulsões, com aroma e plasticidade únicos. Aplicação em cosméticos, indústria farmacêutica, alimentos e velas.",
       link: "contato.html",
     },
     {
       nome: "Parafinas, Cera Microcristalina e Ceresina",
       icone: "🕯️",
       imagem: "img/produto-parafina.jpg",
-      descricao: "Parafinas macro e microcristalinas e ceresina para velas, impermeabilização, embalagens, cosméticos e os mais diversos processos industriais.",
+      descricao: "Parafinas macro e microcristalinas e ceresina para impermeabilização, embalagens, cosméticos, velas e os mais diversos processos industriais.",
       link: "contato.html",
     },
     {
       nome: "Ceras Vegetais Hidrogenadas",
       icone: "🌿",
       imagem: "img/produto-vegetal.jpg",
-      descricao: "Ceras de origem vegetal hidrogenadas: alternativa vegana e renovável para cosméticos, velas e formulações que pedem origem natural.",
+      descricao: "Ceras de origem vegetal hidrogenadas: alternativa vegana e renovável para cosméticos, velas e formulações que pedem origem ecológica e natural.",
       link: "contato.html",
     },
     {
@@ -126,7 +132,7 @@ const DADOS = {
     },
     {
       nome: "Ceras para Frutas",
-      icone: "🍎",
+      icone: "🍊",
       imagem: "img/mercado-frutas.jpg",
       descricao: "Revestimentos de grau alimentício que prolongam a vida pós-colheita, reduzem a perda de água e dão brilho natural às frutas.",
     },
@@ -149,8 +155,8 @@ const DADOS = {
   menu: [
     { texto: "Início",   pagina: "index.html" },
     { texto: "História", pagina: "historia.html" },
-    { texto: "Produtos", pagina: "produtos.html" },
     { texto: "Mercados", pagina: "mercados.html" },
+    { texto: "Produtos", pagina: "produtos.html" },
     { texto: "Contato",  pagina: "contato.html" },
   ],
 };

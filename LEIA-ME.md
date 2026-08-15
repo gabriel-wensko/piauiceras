@@ -57,10 +57,18 @@ Abra `css/style.css`. As primeiras linhas (bloco `:root`) têm todas as
 cores do site com nomes em português.
 
 ## Formulário de contato
-O formulário abre o programa de e-mail do visitante com a mensagem pronta
-(funciona sem servidor). Se quiser receber direto no site sem depender
-do programa de e-mail do visitante, dá para integrar um serviço gratuito
-como o [Formspree](https://formspree.io) depois.
+O formulário envia a mensagem direto por e-mail usando o serviço gratuito
+[Web3Forms](https://web3forms.com) — o visitante não precisa ter programa
+de e-mail instalado.
+
+Para ativar (só precisa fazer uma vez):
+1. Acesse [web3forms.com](https://web3forms.com) e digite o e-mail que vai
+   **receber** as mensagens do site.
+2. Copie a "Access Key" que chega por e-mail.
+3. Cole essa chave em `js/dados.js` → bloco `contato` → campo
+   `web3formsKey`, no lugar de `"COLE_AQUI_SUA_ACCESS_KEY"`.
+
+Até a chave ser preenchida, o formulário mostra um aviso em vez de enviar.
 
 ## Publicar na internet
 O site está publicado via GitHub Pages. Depois de alterar algo, é preciso
