@@ -87,10 +87,24 @@ Passo a passo:
    confira o site no navegador.
 
 ### O navegador não mostra a mudança depois de subir o arquivo
-Isso é cache do navegador (ele guarda uma cópia do `style.css` e dos
-arquivos `.js` para não baixar de novo toda hora) — não é falha do
-FileZilla nem do upload. Se você **editou `css/style.css` ou algum
-arquivo dentro de `js/`**, faça isto antes de subir:
+Isso é cache do navegador (ele guarda uma cópia do site por um tempo
+para não baixar tudo de novo a cada visita) — não é falha do FileZilla
+nem do upload.
+
+**Resolvido automaticamente pelo arquivo `.htaccess`** que fica na raiz
+do site: ele avisa o navegador para sempre conferir o HTML de novo, e
+guardar CSS/JS/fotos por no máximo 1 hora antes de checar se mudou.
+Não precisa mexer nele — só garanta que ele também vá para o servidor
+quando você usar o FileZilla (é um arquivo "escondido" por começar com
+ponto; se não aparecer na lista, ative "Forçar exibição de arquivos
+ocultos" no menu Servidor do FileZilla). Isso só funciona se a
+hospedagem usar Apache — é o caso da grande maioria das hospedagens
+compartilhadas (Hostgator, Locaweb etc.), mas se depois de subir o
+`.htaccess` o problema continuar, pode ser que a sua não use.
+
+Se quiser forçar a atualização **na hora** (sem esperar a 1 hora do
+cache), ainda dá para usar o truque de versão nos arquivos `css/style.css`
+e `js/*.js`:
 
 1. Abra cada arquivo `.html` (`index.html`, `historia.html`,
    `produtos.html`, `mercados.html`, `contato.html`).
@@ -101,13 +115,10 @@ arquivo dentro de `js/`**, faça isto antes de subir:
    <script src="js/main.js?v=1"></script>
    ```
 3. Aumente o número depois do `?v=` em 1 (`v=1` → `v=2`, depois `v=3`,
-   e assim por diante) nas 5 páginas.
-4. Suba os arquivos pelo FileZilla normalmente.
+   e assim por diante) nas 5 páginas, e suba pelo FileZilla.
 
-Isso força o navegador de quem visita o site a baixar a versão nova,
-em vez de usar a que já tinha guardada. Se você só mudou texto, fotos
-ou dados em `js/dados.js` (sem mexer no `style.css`/`main.js`), não
-precisa fazer isso — o navegador já busca o HTML de novo sozinho.
+Isso é opcional agora que o `.htaccess` cuida do problema — use só se
+precisar que uma mudança urgente apareça imediatamente para todo mundo.
 
 ## Créditos das imagens
 As fotos da pasta `img/` foram baixadas do Wikimedia Commons e são de

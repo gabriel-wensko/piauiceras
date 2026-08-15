@@ -1,0 +1,21 @@
+# ============================================================
+# Controle de cache do navegador
+# ============================================================
+# Sem isso, o navegador de quem visita o site pode guardar uma
+# cópia antiga do HTML/CSS/JS/fotos por dias — e as suas
+# atualizações não aparecem, mesmo depois de subir os arquivos
+# novos pelo FileZilla.
+#
+# Com isso: o HTML é sempre conferido de novo a cada visita, e o
+# CSS/JS/fotos ficam guardados no máximo 1 hora antes do
+# navegador checar se mudou. Não precisa mexer neste arquivo.
+# ============================================================
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(css|js|jpg|jpeg|png|gif|svg|webp|ico)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+</IfModule>
