@@ -194,7 +194,7 @@ a { color: var(--verde); }
 .numero span { font-size: .9rem; color: #cfe0d6; }
 
 /* ---------- BLOCO DE TEXTO (história) ---------- */
-.bloco-texto { max-width: 72ch; }
+.bloco-texto { max-width: 900px; margin-inline: auto; }
 .bloco-texto::after { content: ""; display: table; clear: both; }
 .bloco-texto p { margin-bottom: 1.1rem; color: #37453e; }
 .bloco-texto p:first-of-type::first-letter {
@@ -204,8 +204,8 @@ a { color: var(--verde); }
 
 /* Foto de destaque ao lado do texto (ex.: carnaúba na página de história) */
 .foto-destaque {
-  float: right; width: 300px; max-width: 45%;
-  margin: .3rem 0 1.2rem 2rem; border-radius: var(--raio);
+  float: right; width: 380px; max-width: 48%;
+  margin: .3rem 0 1.2rem 2.2rem; border-radius: var(--raio);
   overflow: hidden; box-shadow: 0 14px 34px rgba(27,58,45,.14);
 }
 .foto-destaque img { width: 100%; height: auto; display: block; }
@@ -307,6 +307,17 @@ a { color: var(--verde); }
   padding: 1.1rem 0; font-size: .85rem; text-align: center; opacity: .8;
 }
 
+/* ---------- BOTÃO FLUTUANTE DO WHATSAPP ---------- */
+.whatsapp-flutuante {
+  position: fixed; right: 1.3rem; bottom: 1.3rem; z-index: 60;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25d366; color: var(--branco);
+  display: grid; place-items: center;
+  box-shadow: 0 8px 22px rgba(0,0,0,.25);
+  transition: transform .15s;
+}
+.whatsapp-flutuante:hover { transform: scale(1.08); }
+
 /* ---------- ANIMAÇÃO DE ENTRADA ---------- */
 .animavel { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
 .animavel.visivel { opacity: 1; transform: none; }
@@ -315,7 +326,7 @@ a { color: var(--verde); }
 }
 
 /* ---------- CELULAR ---------- */
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .menu-btn { display: flex; }
   .nav {
     position: absolute; top: 68px; left: 0; right: 0;

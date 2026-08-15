@@ -6,7 +6,7 @@
   <title>Contato — Piauí Ceras</title>
   <meta name="description" content="Entre em contato com a Piauí Ceras e Produtos Derivados Ltda — telefones, e-mail e endereço em São Paulo.">
   <link rel="icon" type="image/svg+xml" href="img/logo-simbolo.svg">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=1">
 </head>
 <body>
 
@@ -32,6 +32,10 @@
           <div class="info-item">
             <span class="icone">📞</span>
             <div><strong>Telefones</strong><p id="ct-telefones"></p></div>
+          </div>
+          <div class="info-item" id="ct-whatsapp-item" style="display:none;">
+            <span class="icone">💬</span>
+            <div><strong>WhatsApp</strong><p><a id="ct-whatsapp" href="#" target="_blank" rel="noopener"></a></p></div>
           </div>
           <div class="info-item">
             <span class="icone">✉️</span>
@@ -98,13 +102,20 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="js/dados.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/dados.js?v=1"></script>
+  <script src="js/main.js?v=1"></script>
   <script>
     /* Preenche os dados de contato a partir do js/dados.js */
     document.addEventListener("DOMContentLoaded", function () {
       var c = DADOS.contato;
       document.getElementById("ct-telefones").textContent = c.telefones.join(" · ");
+      if (c.whatsapp) {
+        var whatsapp = document.getElementById("ct-whatsapp");
+        whatsapp.textContent = c.whatsapp;
+        whatsapp.href = "https://wa.me/" + c.whatsapp.replace(/\D/g, "") +
+          "?text=" + encodeURIComponent("Olá! Vim pelo site da " + DADOS.empresa.nome + " e gostaria de mais informações.");
+        document.getElementById("ct-whatsapp-item").style.display = "";
+      }
       var email = document.getElementById("ct-email");
       email.textContent = c.email;
       email.href = "mailto:" + c.email;

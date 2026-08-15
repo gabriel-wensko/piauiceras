@@ -45,6 +45,27 @@
     });
   }
 
+  /* ---------- WHATSAPP ---------- */
+  function linkWhatsapp(mensagem) {
+    const numero = DADOS.contato.whatsapp.replace(/\D/g, "");
+    return "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
+  }
+
+  function montarBotaoWhatsapp() {
+    if (!DADOS.contato.whatsapp) return;
+    const a = document.createElement("a");
+    a.href = linkWhatsapp("Olá! Vim pelo site da " + DADOS.empresa.nome + " e gostaria de mais informações.");
+    a.className = "whatsapp-flutuante";
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.setAttribute("aria-label", "Falar no WhatsApp");
+    a.innerHTML =
+      '<svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor" aria-hidden="true">' +
+      '<path d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.6 1.9 6.5L4 29l7.7-1.9C13.4 27.7 14.7 28 16 28c6.6 0 12-5.4 12-12S22.6 3 16 3zm5.9 16.9c-.3.7-1.4 1.4-2 1.5-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-5-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.8 1.9.9 2 .1.1.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.3-.4.5-.1.1-.3.3-.1.6.2.3.9 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.2.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1.3.1 1.7.8 2 .9.3.2.5.2.6.4.1.1.1.7-.2 1.4z"/>' +
+      "</svg>";
+    document.body.appendChild(a);
+  }
+
   /* ---------- RODAPÉ ---------- */
   function montarFooter() {
     const alvo = document.getElementById("site-footer");
@@ -57,6 +78,10 @@
         return '<li><a href="' + item.pagina + '">' + item.texto + "</a></li>";
       })
       .join("");
+    const linhaWhatsapp = c.whatsapp
+      ? '    <p><a href="' + linkWhatsapp("Olá! Vim pelo site da " + DADOS.empresa.nome + " e gostaria de mais informações.") +
+        '" target="_blank" rel="noopener">WhatsApp: ' + c.whatsapp + "</a></p>"
+      : "";
 
     alvo.innerHTML =
       '<div class="container footer-grid">' +
@@ -73,6 +98,7 @@
       "  <div>" +
       "    <h4>Contato</h4>" +
       "    <p>" + telefones + "</p>" +
+      linhaWhatsapp +
       '    <p><a href="mailto:' + c.email + '">' + c.email + "</a></p>" +
       "    <p>" + c.endereco + "<br>" + c.cidade + " · " + c.cep + "</p>" +
       "  </div>" +
@@ -141,6 +167,7 @@
     montarHeader();
     montarFooter();
     montarCartoes();
+    montarBotaoWhatsapp();
     animarAoRolar();
   });
 })();
